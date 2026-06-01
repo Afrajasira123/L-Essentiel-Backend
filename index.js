@@ -32,6 +32,8 @@ app.use(
       const allowedOrigins = [
         "http://localhost:5173",
         "http://localhost:5174",
+        "http://localhost:5175",
+        "http://localhost:5176",
         "http://localhost:4000",
       ];
 
@@ -80,12 +82,13 @@ app.use("/*path", (req, res) => {
 //global error handling
 app.use(errorHandleMiddleware);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 try {
   await mongoose.connect(process.env.MONGODB_URI);
   console.log("Database connected successfully");
-  app.listen(port, () => {
+
+  app.listen(port, "0.0.0.0", () => {
     console.log(`server started listening to ${port}`);
   });
 } catch (error) {
