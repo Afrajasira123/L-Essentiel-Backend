@@ -35,6 +35,7 @@ app.use(
         "http://localhost:5175",
         "http://localhost:5176",
         "http://localhost:4000",
+        "https://l-essentiel.netlify.app",
       ];
 
       if (allowedOrigins.includes(origin)) {
