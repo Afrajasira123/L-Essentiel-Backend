@@ -31,10 +31,16 @@ export const loginUser = async (req, res) => {
       expiresIn: "30d",
     });
 
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 30),
+    //   secure: process.env.NODE_ENV === "production",
+    // });
     res.cookie("token", token, {
       httpOnly: true,
+      secure: true,
+      sameSite: "none",
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 30),
-      secure: process.env.NODE_ENV === "production",
     });
     res.status(200).json({
       message: "Logged in Success",
@@ -53,10 +59,16 @@ export const loginUser = async (req, res) => {
 //logout
 export const logout = async (req, res) => {
   try {
+    // res.cookie("token", "logout", {
+    //   httpOnly: true,
+    //   expires: new Date(Date.now()),
+    //   secure: process.env.NODE_ENV === "production",
+    // });
     res.cookie("token", "logout", {
       httpOnly: true,
+      secure: true,
+      sameSite: "none",
       expires: new Date(Date.now()),
-      secure: process.env.NODE_ENV === "production",
     });
     res.status(200).json({ message: "Logged Out success" });
   } catch (error) {
